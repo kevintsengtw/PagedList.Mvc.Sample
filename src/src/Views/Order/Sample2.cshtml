@@ -1,0 +1,187 @@
+﻿@model IPagedList<src.Models.Order>
+@{
+    ViewBag.Title = "Orders - List with Checkbox";
+}
+@section styles
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+<h2>Orders - List with Checkbox</h2>
+<hr />
+<input type="button" class="btn btn-success" id="ButtonGetCheckedValues" value="顯示已勾選的值" />
+<input type="button" class="btn btn-primary" id="ButtonPost" value="送出" />
+<div id="OrderData"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        //已勾選的 Checkbox 值
+        var checkedValueArray = [];
+
+        $(function() {
+            var page = window.location.hash ? window.location.hash.slice(1) : 1;
+            fetchPage(page);
+
+            $('#ButtonGetCheckedValues').click(function() {
+                if (checkedValueArray.length == 0) {
+                    alert('Empty');
+                } else {
+                    var result = checkedValueArray.join(',');
+                    alert('Checked Values: ' + result);
+                }
+            });
+
+            $('#ButtonPost').click(function() {
+                if (checkedValueArray.length == 0) {
+                    alert('Empty');
+                } else {
+                    var result = checkedValueArray.join(',');
+                    PostData(result);
+                }
+            });
+        });
+
+        var PostData = function(checkedValues) {
+            if (!checkedValues) {
+                alert('Empty');
+                return false;
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("PostCheckedValues", "Order")',
+                    data: { checkedValues: checkedValues },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.Result) {
+                            alert("已取得的 Order 資料數：" + response.Msg);
+                        }
+                        else {
+                            alert(response.Msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        var fetchPage = function(page) {
+            var pagedPartialUrl = '@Url.Action("PagedCheckboxPartial", "Order")';
+            $.get(pagedPartialUrl, { page: page }, function(data) {
+                window.location.hash = page;
+                $('#OrderData').html(data);
+                $('#OrderData .pagination li a').each(function(i, item) {
+                    var hyperLinkUrl = $(item).attr('href');
+                    if (typeof hyperLinkUrl !== 'undefined' && hyperLinkUrl !== false) {
+                        var pageNumber = $(item).attr('href').replace('/Order/Sample2?page=', '');
+                        $(item).attr('href', '#').click(function(event) {
+                            event.preventDefault();
+                            $(event.target).attr('href');
+                            fetchPage(pageNumber);
+                        });
+                    }
+                });
+
+                CheckeBoxsEventHandler();
+                ChangeCurrentPageCheckboxStatus();
+                console.log(checkedValueArray);
+            });
+        };
+
+        var CheckeBoxsEventHandler = function() {
+            $('th input:checkbox').click(function() {
+                $('td input:checkbox').prop('checked', $('th input:checkbox').is(':checked'));
+                UpdateCheckedValue();
+            });
+
+            $('td input:checkbox').change(function() {
+                $('th input:checkbox').prop(
+                    'checked',
+                    $('td input:checkbox:checked').length == $('td input:checkbox').length
+                );
+                UpdateCheckedValue();
+            });
+        };
+
+        var UpdateCheckedValue = function() {
+            /// <summary>
+            /// 更新 Checkbox 勾選項目
+            /// </summary>
+
+            //Add
+            var currentPageCheckedValues = GetCheckedValues();
+            if (checkedValueArray.length == 0) {
+                $.each(currentPageCheckedValues, function(i, item) {
+                    checkedValueArray.push(item);
+                });
+            } else {
+                $.each(currentPageCheckedValues, function(i, item) {
+                    var count = 0;
+                    $.each(checkedValueArray, function(index, element) {
+                        if (element == item) {
+                            count++;
+                        }
+                    });
+                    if (count == 0) {
+                        checkedValueArray.push(item);
+                    }
+                });
+            }
+
+            //Remove
+            var currentPageUnCheckedValues = GetUnCheckedValues();
+            if (currentPageUnCheckedValues.length > 0) {
+                $.each(currentPageUnCheckedValues, function(i, item) {
+                    checkedValueArray = $.grep(checkedValueArray, function(element, j) {
+                        return element != item;
+                    });
+                });
+            }
+
+            console.log(checkedValueArray);
+        };
+
+        var ChangeCurrentPageCheckboxStatus = function() {
+            /// <summary>
+            /// 改變目前頁面的 Checkbox 狀態
+            /// </summary>
+
+            var currentPageCheckBoxValues = $('input:checkbox[name=checkboxs]').map(function() {
+                return $(this).val();
+            }).get();
+
+            var count = 0;
+            $.each(currentPageCheckBoxValues, function(i, item) {
+                $.each(checkedValueArray, function(index, element) {
+                    if (item == element) {
+                        count++;
+                        $('input:checkbox[name=checkboxs][value=' + item + ']').prop('checked', 'checked');
+                    }
+                });
+            });
+
+            $('th input:checkbox').prop(
+                'checked',
+                count == $('input:checkbox[name=checkboxs]').length
+            );
+        };
+
+        var GetCheckedValues = function() {
+            /// <summary>
+            /// 取得有勾選的項目
+            /// </summary>
+            return $('input:checkbox[name=checkboxs]:checked').map(function() {
+                return $(this).val();
+            }).get();
+        };
+
+        var GetUnCheckedValues = function() {
+            /// <summary>
+            /// 取得未勾選的項目
+            /// </summary>
+            return $('input:checkbox[name=checkboxs]:not(:checked)').map(function() {
+                return $(this).val();
+            }).get();
+        };
+    </script>
+}

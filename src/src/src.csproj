@@ -64,6 +64,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,10 +126,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerDemographic.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Northwind.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Order_Detail.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Shipper.cs" />
+    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\Territory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\ProductSearchModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Northwind.mdf" />
@@ -179,11 +197,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Sample1.cshtml" />
+    <Content Include="Views\Customer\Sample2.cshtml" />
+    <Content Include="Views\Customer\Sample3.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\_PagedPartial.cshtml" />
+    <Content Include="Views\Order\Sample2.cshtml" />
+    <Content Include="Views\Order\_PagedCheckboxPartial.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Views\Customer\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -1,0 +1,85 @@
+﻿@model IPagedList<src.Models.Customer>
+
+@{
+    ViewBag.Title = "Sample1";
+}
+@section styles
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+<h2>Sample1</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Fax)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+        </tr>
+    }
+
+</table>
+   
+@Html.PagedListPager(Model, page=>Url.Action("Sample1", new { page }))

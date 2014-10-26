@@ -1,0 +1,145 @@
+﻿@using PagedList.Mvc
+@model src.ViewModels.ProductListViewModel
+
+@{
+    ViewBag.Title = "Product - List";
+}
+
+<h2>Product - List</h2>
+<hr />
+<div class="well">
+    @using (Html.BeginForm("Index", "Product",
+        FormMethod.Post,
+        new { @class = "form-horizontal", role = "form", id = "ProductList" }))
+    {
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="col-lg-3 control-label">Product Name:</label>
+                <div class="col-lg-8">
+                    @Html.EditorFor(x => x.SearchParameter.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label class="col-lg-3 control-label">Quantity Per Unit:</label>
+                <div class="col-lg-8">
+                    @Html.EditorFor(x => x.SearchParameter.QuantityPerUnit, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="col-lg-3 control-label">Supplier:</label>
+                <div class="col-lg-8">
+                    @Html.DropDownListFor(x => x.SearchParameter.Supplier, (SelectList)Model.Suppliers, "-- select item --", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label class="col-lg-3 control-label">Category:</label>
+                <div class="col-lg-8">
+                    @Html.DropDownListFor(x => x.SearchParameter.Category, (SelectList)Model.CategoryItems, "-- select item --", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <span class="clearfix"></span>
+        <div class="row">
+            <div class="col-md-offset-5">
+                <input type="submit" class="btn btn-primary" value="Search">
+                <span></span>
+                <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+        </div>
+    }
+</div>
+
+@Html.PagedListPager(Model.Products,
+    page => Url.Action("Index", new { page }),
+    PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+<table class="table">
+    <tr>
+        <th>
+            Category Name
+        </th>
+        <th>
+            Supplier Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().QuantityPerUnit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitsInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitsOnOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ReorderLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Discontinued)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discontinued)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('.pagination>li>a[href]').each(function (i, item) {
+                var page = $(item).attr('href').replace('/Product?page=', '');
+                $(item).attr('href', '#').click(function () { postPage(page); });
+
+            });
+        });
+
+        function postPage(page) {
+            var targetFormId = '#ProductList';
+            if ($(targetFormId).size() > 0) {
+                $('<input>')
+                    .attr({ type: 'hidden', id: 'PageIndex', name: 'PageIndex', value: page })
+                    .appendTo($(targetFormId));
+                $(targetFormId).submit();
+            }
+        };
+    </script>
+}

@@ -1,0 +1,48 @@
+﻿@model IPagedList<src.Models.Order>
+@{
+    ViewBag.Title = "Orders - List";
+}
+@section styles
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+<h2>Orders - List</h2>
+    
+<div id="OrderData"></div>
+
+@section scripts
+{     
+    <script type="text/javascript">
+
+        $(function() {
+            var page = window.location.hash
+                ? window.location.hash.slice(1)
+                : 1;
+            fetchPage(page);
+        });
+
+        var fetchPage = function(page) {
+            var pagedPartialUrl = '@Url.Action("PagedPartial", "Order")';
+
+            $.get(pagedPartialUrl, { page: page }, function(data) {
+
+                window.location.hash = page;
+
+                $('#OrderData').html(data);
+
+                $('#OrderData .pagination li a').each(function (i, item) {
+                    var hyperLinkUrl = $(item).attr('href');
+                    if (typeof hyperLinkUrl !== 'undefined' && hyperLinkUrl !== false) {
+                        var pageNumber = $(item).attr('href').replace('/Order?page=', '');
+                        $(item).attr('href', '#').click(function(event) {
+                            event.preventDefault();
+                            $(event.target).attr('href');
+                            fetchPage(pageNumber);
+                        });
+                    }
+                });
+            });
+        };
+    </script>
+}

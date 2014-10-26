@@ -1,0 +1,161 @@
+﻿@model IPagedList<src.Models.Customer>
+
+@{
+    ViewBag.Title = "Sample2";
+}
+@section styles
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+<h2>Sample2</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Fax)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.Minimal)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.MinimalWithPageCountText)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.PageNumbersOnly)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.OnlyShowFivePagesAtATime)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.TwitterBootstrapPager)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    PagedListRenderOptions.TwitterBootstrapPagerAligned)*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    new PagedListRenderOptions()
+    {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "> 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>"
+    })*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    new PagedListRenderOptions()
+    {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "> 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>",
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    new PagedListRenderOptions()
+    {
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "> 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>" ,
+        PageCountAndCurrentLocationFormat = "第 {0} 頁 / 共 {1} 頁",
+        DisplayPageCountAndCurrentLocation = true,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })*@
+
+@*@Html.PagedListPager(Model, page => Url.Action("Sample2", new { page }),
+    new PagedListRenderOptions()
+    {
+        DisplayLinkToIndividualPages = false,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayPageCountAndCurrentLocation = true,
+        PageCountAndCurrentLocationFormat = "第 {0} 頁 / 共 {1} 頁",
+        DisplayItemSliceAndTotal = true,
+        ItemSliceAndTotalFormat =  "顯示項目: {0} ~ {1} / 共 {2} 項"
+    })*@
+
+@*@Html.PagedListGoToPageForm(Model, @Url.Action("Sample2", "Customer",
+    new GoToFormRenderOptions
+    {
+        InputFieldName = "page"
+    }))*@

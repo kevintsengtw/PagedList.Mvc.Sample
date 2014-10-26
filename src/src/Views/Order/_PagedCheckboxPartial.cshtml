@@ -1,0 +1,116 @@
+﻿@model IPagedList<src.Models.Order>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.PagedListPager(Model,
+                page => Url.Action("Sample2", new { page }),
+                PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr style="background-color: #cdcdcd;">
+                <th>
+                    <input type="checkbox" name="HeaderCheckbox" id="HeaderCheckbox" />
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().OrderID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().CustomerID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().RequiredDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShippedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipVia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Freight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipRegion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipPostalCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ShipCountry)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="checkboxs" value="@item.OrderID" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequiredDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShippedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipVia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Freight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipRegion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipPostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipCountry)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

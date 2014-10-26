@@ -1,0 +1,116 @@
+﻿@model IPagedList<src.Models.Customer>
+
+@{
+    ViewBag.Title = "Sample3";
+}
+@section styles
+{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <style>
+        .selectWidth {
+            width: auto;
+        }
+    </style>
+}
+
+<h2>Sample3</h2>
+
+<form action="@Url.Action("Sample3", "Customer")" method="get" class="form-horizontal">
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <div class="form-group">
+                <label for="page" class="col-xs-2 control-label">
+                    頁數：
+                </label>
+                <div class="col-xs-2">
+                    @Html.DropDownList("page", (List<SelectListItem>)ViewBag.PageItems, new { @class = "form-control selectWidth" })
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">送出</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            @ViewBag.PageCountAndCurrentLocation , @ViewBag.ItemSliceAndTotalFormat
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ContactTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Fax)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.PagedListPager(Model, page => Url.Action("Sample3", new { page }),
+            PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+</div>

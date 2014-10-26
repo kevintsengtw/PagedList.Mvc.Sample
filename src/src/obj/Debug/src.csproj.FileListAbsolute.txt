@@ -28,7 +28,6 @@ Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\zh-Hant\System.Web.WebPages.resources
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\zh-Hant\System.Web.WebPages.Deployment.resources.dll
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\zh-Hant\System.Web.Optimization.resources.dll
-Z:\GitHub\PagedList.Mvc.Sample\src\src\obj\Debug\src.csprojResolveAssemblyReference.cache
 Z:\GitHub\PagedList.Mvc.Sample\src\src\obj\Debug\src.dll
 Z:\GitHub\PagedList.Mvc.Sample\src\src\obj\Debug\src.pdb
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\EntityFramework.dll
@@ -39,3 +38,5 @@ Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\EntityFramework.xml
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\EntityFramework.SqlServer.xml
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\PagedList.xml
 Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\PagedList.Mvc.xml
+Z:\GitHub\PagedList.Mvc.Sample\src\src\bin\zh-Hant\EntityFramework.resources.dll
+Z:\GitHub\PagedList.Mvc.Sample\src\src\obj\Debug\src.csprojResolveAssemblyReference.cache

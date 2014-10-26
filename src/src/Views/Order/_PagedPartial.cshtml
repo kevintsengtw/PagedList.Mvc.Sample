@@ -1,0 +1,101 @@
+﻿@model IPagedList<src.Models.Order>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Customer.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Employee.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Shipper.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().RequiredDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShippedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Freight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipRegion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipPostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipCountry)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipper.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Freight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipRegion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipPostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipCountry)
+                </td>
+            </tr>
+        }
+
+    </table>
+}

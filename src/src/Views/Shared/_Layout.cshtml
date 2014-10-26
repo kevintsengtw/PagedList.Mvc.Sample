@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")   
+    @RenderSection("styles", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
